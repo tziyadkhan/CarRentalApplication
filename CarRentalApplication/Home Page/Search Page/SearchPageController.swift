@@ -42,7 +42,7 @@ class SearchPageController: UIViewController {
     
     lazy var searchTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Search for a carrrrrrr"
+        textField.placeholder = "Search for a car"
         textField.addTarget(self, action: #selector(searchTextFieldDidChange(_:)), for: .editingChanged)
         
         return textField
@@ -62,7 +62,6 @@ class SearchPageController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configUI()
         configConstraints()
         fetchItems()
@@ -131,6 +130,7 @@ extension SearchPageController {
         carItems.removeAll()
         let data = realm.objects(CarModel.self)
         carItems.append(contentsOf: data)
+        originalCarItems.append(contentsOf: data)
         vehicleCollection.reloadData()
     }
     

@@ -14,11 +14,11 @@ class CarCategoryHeader: UICollectionReusableView {
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 110, height: 150)
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 25
+        layout.minimumInteritemSpacing = 25
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+    
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.dataSource = self
         collection.delegate = self
@@ -27,29 +27,31 @@ class CarCategoryHeader: UICollectionReusableView {
         
         return collection
     }()
-    
+    var carItems = [CarModel]()
+
     let helper = RealmFunctions()
     let realm = try! Realm()
     var categoryCounts = [String: Int]()
     var categorySelectedIndexPath: IndexPath?
     var didSelectCategoryCallback: ((String) -> Void)?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    func configure() {
         addSubview(carCategoryCollection)
+//        carCategoryCollection.reloadData()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
+        carCategoryCollection.frame = bounds
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
 }
 
 extension CarCategoryHeader: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         for category in CarCategory.allCases {
             let categoryCars = realm.objects(CarModel.self).filter("category = %@", category.rawValue)
             categoryCounts[category.rawValue] = categoryCars.count
@@ -58,7 +60,7 @@ extension CarCategoryHeader: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CategoryCell.self)", for: indexPath) as! CategoryCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         let category = CarCategory.allCases[indexPath.item]
         cell.carCategoryName.text = category.rawValue
         cell.carCategoryImage.image = UIImage(named: category.rawValue)
@@ -106,8 +108,4 @@ extension CarCategoryHeader: UICollectionViewDelegate, UICollectionViewDataSourc
 //        print("Normal List: \(carItems)")
     
     }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        .init(width: 200, height: collectionView.frame.height)
-//    }
-    
 }

@@ -23,6 +23,7 @@ class MainCoordinator: Coordinator {
     func showHomePage() {
         let controller = TabBarController()
         controller.coordinator = self
+        controller.title = "Home"
         navigationController.show(controller, sender: nil)
     }
     

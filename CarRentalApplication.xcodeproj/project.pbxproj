@@ -15,7 +15,6 @@
 		900918702B9DAC2E0037E25A /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9009186F2B9DAC2E0037E25A /* CarModel.swift */; };
 		900918722B9DAC690037E25A /* RealmFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900918712B9DAC690037E25A /* RealmFunctions.swift */; };
 		900918752B9DB5920037E25A /* CarListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900918742B9DB5920037E25A /* CarListCell.swift */; };
-		900918772B9DCB060037E25A /* VehiclePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900918762B9DCB060037E25A /* VehiclePageViewModel.swift */; };
 		900918792B9DEE230037E25A /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900918782B9DEE230037E25A /* CategoryCell.swift */; };
 		9009187B2B9DF18D0037E25A /* CarCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9009187A2B9DF18D0037E25A /* CarCategoryHeader.swift */; };
 		90CFC0CB2B9D971E00D53BE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFC0CA2B9D971E00D53BE4 /* AppDelegate.swift */; };
@@ -43,7 +42,6 @@
 		9009186F2B9DAC2E0037E25A /* CarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
 		900918712B9DAC690037E25A /* RealmFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFunctions.swift; sourceTree = "<group>"; };
 		900918742B9DB5920037E25A /* CarListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarListCell.swift; sourceTree = "<group>"; };
-		900918762B9DCB060037E25A /* VehiclePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclePageViewModel.swift; sourceTree = "<group>"; };
 		900918782B9DEE230037E25A /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9009187A2B9DF18D0037E25A /* CarCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCategoryHeader.swift; sourceTree = "<group>"; };
 		90CFC0C72B9D971E00D53BE4 /* CarRentalApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarRentalApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				900918672B9DA35C0037E25A /* VehiclePageController.swift */,
-				900918762B9DCB060037E25A /* VehiclePageViewModel.swift */,
 			);
 			path = "Vehicles Page";
 			sourceTree = "<group>";
@@ -126,10 +123,17 @@
 			isa = PBXGroup;
 			children = (
 				900918742B9DB5920037E25A /* CarListCell.swift */,
-				900918782B9DEE230037E25A /* CategoryCell.swift */,
-				9009187A2B9DF18D0037E25A /* CarCategoryHeader.swift */,
 			);
 			path = "Collection Cells";
+			sourceTree = "<group>";
+		};
+		907A41292B9E2BE20070B24B /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				9009187A2B9DF18D0037E25A /* CarCategoryHeader.swift */,
+				900918782B9DEE230037E25A /* CategoryCell.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		90CFC0BE2B9D971E00D53BE4 = {
@@ -157,6 +161,7 @@
 				90CFC0DE2B9D988900D53BE4 /* Coordinator */,
 				9009186B2B9DA3CC0037E25A /* Tab Bar Controller */,
 				9009186E2B9DAC200037E25A /* Data Manager */,
+				907A41292B9E2BE20070B24B /* Header */,
 				900918732B9DB49A0037E25A /* Collection Cells */,
 				90CFC0CA2B9D971E00D53BE4 /* AppDelegate.swift */,
 				90CFC0CC2B9D971E00D53BE4 /* SceneDelegate.swift */,
@@ -288,7 +293,6 @@
 				90CFC0F12B9D9B3500D53BE4 /* ReusableButton.swift in Sources */,
 				90CFC0F22B9D9B3500D53BE4 /* ReusableImageView.swift in Sources */,
 				9009186A2B9DA36A0037E25A /* SearchPageController.swift in Sources */,
-				900918772B9DCB060037E25A /* VehiclePageViewModel.swift in Sources */,
 				900918682B9DA35C0037E25A /* VehiclePageController.swift in Sources */,
 				90CFC0E22B9D98BF00D53BE4 /* MainCoordinator.swift in Sources */,
 				90CFC0F42B9D9B3500D53BE4 /* ReusableStackView.swift in Sources */,

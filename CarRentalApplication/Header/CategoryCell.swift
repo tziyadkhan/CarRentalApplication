@@ -23,7 +23,7 @@ class CategoryCell: UICollectionViewCell {
     }()
     
     lazy var carCategoryName: UILabel = {
-        return ReusableLabel.reusableLabel(fontName: "Helvetica Neue", fontSize: 17, numOfLines: 0)
+        return ReusableLabel.reusableLabel(fontName: "Helvetica Neue Medium", fontSize: 17, numOfLines: 0)
     }()
     
     lazy var carCategoryCount: UILabel = {
@@ -57,17 +57,20 @@ class CategoryCell: UICollectionViewCell {
         }
         
         carCategoryImage.snp.makeConstraints { make in
-            make.center.equalTo(background)
+            make.top.equalTo(background).inset(8)
+            make.left.equalTo(background.snp.left).inset(-32)
+            make.height.equalTo(90)
+            make.width.equalTo(140)
         }
         
         carCategoryName.snp.makeConstraints { make in
-            make.top.equalTo(carCategoryImage.snp.bottom).inset(-12)
-            make.centerX.equalTo(carCategoryImage)
+            make.top.equalTo(carCategoryImage.snp.bottom).inset(-4)
+            make.left.equalTo(background.snp.left).inset(24)
         }
         
         carCategoryCount.snp.makeConstraints { make in
-            make.top.equalTo(carCategoryName.snp.bottom).inset(-8)
-            make.centerX.equalTo(carCategoryName)
+            make.top.equalTo(carCategoryName.snp.bottom).inset(-4)
+            make.left.equalTo(carCategoryName.snp.left).inset(24)
         }
     }
     

@@ -18,13 +18,13 @@ class VehiclePageController: UIViewController, UITextFieldDelegate {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        
-        
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+ 
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.dataSource = self
         collection.delegate = self
         collection.register(CarListCell.self, forCellWithReuseIdentifier: "\(CarListCell.self)")
+        collection.register(CarCategoryHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(CarCategoryHeader.self)")
         collection.backgroundColor = .menuBG
         
         return collection
@@ -60,11 +60,11 @@ class VehiclePageController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configUI()
         configConstraints()
         fetchItems()
         helper.getFilePath()
+        print(carItems)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,10 +75,10 @@ class VehiclePageController: UIViewController, UITextFieldDelegate {
 
 
 //MARK: Collection Functions
-extension VehiclePageController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension VehiclePageController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return carItems.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -86,9 +86,26 @@ extension VehiclePageController: UICollectionViewDelegate, UICollectionViewDataS
         cell.filldata(data: carItems[indexPath.item])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(CarCategoryHeader.self)", for: indexPath) as! CarCategoryHeader
+        
+        header.didSelectCategoryCallback = { category in
+            let categoryCars = self.realm.objects(CarModel.self).filter("category = %@", category)
+                self.carItems = Array(categoryCars)
+                self.vehicleCollection.reloadData()
+        }
+        
+        header.configure()
+        
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        CGSize(width: collectionView.frame.width, height: 180)
+    }
 }
-
-
 
 //MARK: Functions
 extension VehiclePageController {
@@ -129,6 +146,7 @@ extension VehiclePageController {
         carItems.removeAll()
         let data = realm.objects(CarModel.self)
         carItems.append(contentsOf: data)
+        originalCarItems.append(contentsOf: data)
         vehicleCollection.reloadData()
     }
     
